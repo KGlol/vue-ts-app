@@ -1,3 +1,4 @@
+// 使项目能够使用jsx
 import Vue, { VNode } from 'vue'
 
 declare global {
