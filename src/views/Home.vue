@@ -13,7 +13,7 @@
   export default class Home extends Vue {};
 </script>
 
-<style lang="sass" scope>
+<style lang="sass" scoped>
   .home 
     color: blue
 </style>

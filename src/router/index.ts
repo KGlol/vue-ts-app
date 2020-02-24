@@ -34,10 +34,17 @@ const routes = [
   // }
 ]
 
-const router = new VueRouter({
+const router:any = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// 路由拦截(判断登录状态)
+router.beforeEach((to: any, from: any, next: any) => {
+  const isLogin = localStorage.tsToken ? true : false
+  if (to.path == '/login' || to.path == '/password') next()
+  else isLogin ? next() : next('/login')
 })
 
 export default router
