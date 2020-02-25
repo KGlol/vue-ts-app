@@ -16,7 +16,7 @@ export default class App extends Vue{
   @Action('setUser') setUser: any
 
   created() {
-    // 处理页面刷新vuex数据即清除的问题
+    // 处理页面刷新vuex数据重置的问题
     const token = localStorage.tsToken
     token && this.setUser(token)
   }
@@ -29,5 +29,5 @@ export default class App extends Vue{
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   text-align: center
-  color: 
+
 </style>

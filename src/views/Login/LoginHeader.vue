@@ -59,7 +59,7 @@
             sans-serif;
           font-weight: 600;
           img {
-            width: 200px;
+            width: 100px;
             padding-bottom: 3px;
           }
         }

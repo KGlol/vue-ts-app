@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { GetterTree } from 'vuex'
 import jwt_decode from 'jwt-decode'
 
 Vue.use(Vuex)
