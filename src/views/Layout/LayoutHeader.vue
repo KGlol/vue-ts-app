@@ -10,8 +10,8 @@
       <el-col :xs="14" :sm="12" :md="10" :lg="8" :xl="6">
         <el-dropdown class="system-user" @command="userCommand">
           <span class="userinfo-inner">
-            <img :src="require(`@/assets/${getUser.key}.jpg`)" alt="" />
-            {{getUser.username}}
+            <img :src="require(`@/assets/${user.key}.jpg`)" alt="" />
+            {{user.username}}
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="usercenter">个人中心</el-dropdown-item>
@@ -26,7 +26,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   // import { State ,Mutation, Getter, Action } from 'vuex-class'
-  import { State, Getter, Mutation, Action } from 'vuex-class'
+  import { Getter } from 'vuex-class'
 
   @Component({
     components: {}
@@ -34,10 +34,9 @@
 
   export default class LayoutHeader extends Vue {
     // 获取vuex中的用户信息
-    @Getter('user') getUser: any;
+    @Getter('user') user: any;
     // 头部下拉框的事件处理函数
     userCommand(command: string): void {
-      console.log(command);
       if (command === 'logout') {
         localStorage.removeItem('tsToken')
         this.$router.replace('/login')
