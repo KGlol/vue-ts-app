@@ -26,6 +26,7 @@ export default class Charts extends Vue{
 
   mounted() {
     this.drawChart()
+    console.log('渲染了图表');
   }
 
   generatorWidthAndHeihgt() {

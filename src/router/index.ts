@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../views/Layout/index.vue'
+import jwt_decode from 'jwt-decode'
+import { hasPermission } from '../store/index'
+
 
 Vue.use(VueRouter)
 /**
@@ -46,7 +49,7 @@ export const asyncRouterMap = [
       {
         path: '/formData',
         name: 'formData',
-        meta: { title: '表单管理', icon: 'fa fa-file-text-o' },
+        meta: { title: '表单管理', roles: ['admin, editor'], icon: 'fa fa-file-text-o' },
         component: () => import('@/views/DataManage/FormData.vue')
       },
       {
@@ -67,7 +70,7 @@ export const asyncRouterMap = [
       {
         path: '/accountData',
         name: 'accountData',
-        meta: { title: '账户管理', icon: 'fa fa-user-plus' },
+        meta: { title: '账户管理', icon: 'fa fa-user-plus', roles: ['admin'] },
         component: () => import('@/views/UserManage/AccountData.vue')
       }
     ]
@@ -133,7 +136,16 @@ const router:any = new VueRouter({
 router.beforeEach((to: any, from: any, next: any) => {
   const isLogin = localStorage.tsToken ? true : false
   if (to.path == '/login' || to.path == '/password') next()
-  else isLogin ? next() : next('/login')
+  // else isLogin ? next() : next('/login')
+  else {
+    // 解决用户登录后直接手动输入路径访问无权限页面的问题
+    if (isLogin) {
+      const { key } = jwt_decode(localStorage.tsToken)
+      // 权限判断
+      if (hasPermission(key, to)) next() //有权限
+      else next('/404') // 无权限
+    } else next('/login') // 没登录
+  }
 })
 
 export default router

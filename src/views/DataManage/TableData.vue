@@ -12,7 +12,8 @@
     <el-table-column label="技术栈" prop="type" width="120"></el-table-column>
     <el-table-column label="报名人数" prop="count" width="120"></el-table-column>
     <el-table-column label="上线日期" prop="date" width="160"></el-table-column>
-    <el-table-column label="操作" width="160">
+    <!-- 判断用户权限游客不能编辑和删除 -->
+    <el-table-column label="操作" width="160" v-if="user.key !== 'visitor'">
       <!-- 获取指定行的下标index和内容row -->
       <template slot-scope="scope">
         <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -39,6 +40,9 @@
   import { Component, Provide, Vue } from 'vue-property-decorator' 
   import EditDialog from './EditDialog.vue'
 
+  // 游客不能编辑表格的权限
+  import { Getter } from 'vuex-class'
+
   @Component({
     components: {
       EditDialog
@@ -61,6 +65,8 @@
       date: '',
       _id: ''
     }
+
+    @Getter('user') user: any
 
     created() {
       this.loadData()

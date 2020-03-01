@@ -2,6 +2,7 @@
 <template>
   <el-dialog title="编辑课程" :visible.sync="dialogVisible" :close-on-click-model="false" :show-close="false">
     <el-form ref="ruleForm" :model="dialogData" :rules="rules"  label-width="100px" size="small" class="form-box">
+      <!-- el-form-item上的prop用于标记表单单项的记号,rules中对应键值的表单验证 -->
       <el-form-item label="课程名称" prop="title">
         <el-input v-model="dialogData.title" placeholder="请输入课程名称"></el-input>
       </el-form-item>

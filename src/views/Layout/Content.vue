@@ -64,7 +64,6 @@
         }
       }
       this.breadCrumbItems = breadCrumbItems
-      console.log(this.breadCrumbItems);
     }
   }
 </script>
